@@ -55,6 +55,11 @@ jobs:
       - name: Print Current Directory
         run: |
           echo "Current directory: $(pwd)"
+        - name: Debug Directory Contents
+        run: |
+          ls -la /var/www/html
+          ls -la /var/www/html/laravel9deploycicd
+
       - name: Change directory
         run: cd /var/www/html/laravel9deploycicd
 
