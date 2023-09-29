@@ -55,6 +55,8 @@ jobs:
       - name: Print Current Directory
         run: |
           echo "Current directory: $(pwd)"
+      - name: Change directory
+        run: cd /var/www/html/laravel9deploycicd
 
       - name: Deploy Laravel Application
         run: |
