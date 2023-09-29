@@ -1,7 +1,8 @@
-name: Laravel CI
+name: Laravel CI cd
 on:
-  pull_request:
-    branches: [ master, staging ]
+  push:
+    branches:
+      - main
 jobs:
   laravel-tests:
     runs-on: ubuntu-latest
