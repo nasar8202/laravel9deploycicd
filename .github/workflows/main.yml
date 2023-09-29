@@ -62,7 +62,7 @@ jobs:
           ls -la /var/www/html/laravel9deploycicd
     
       - name: Change directory
-        run: cd /var/www/html/laravel9deploycicd
+        run:  sudo cd /var/www/html/laravel9deploycicd
 
       - name: Deploy Laravel Application
         run: |
