@@ -45,7 +45,7 @@ jobs:
           sudo systemctl enable nginx
       
       - name: List Files in Directory
-        run: ls -la /var/www/html/laravel9deploycicd/laravel9deploycicd
+        run: ls -la /var/www/html
 
       - name: Check Current Directory
         run: pwd
@@ -55,7 +55,7 @@ jobs:
 
       - name: Deploy Laravel Application
         run: |
-          cd /var/www/html/laravel9deploycicd/laravel9deploycicd
+          cd /var/www/html/laravel9deploycicd
           git pull origin main
           composer install
           php artisan migrate --force
