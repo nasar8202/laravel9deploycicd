@@ -56,13 +56,6 @@ jobs:
         run: |
           echo "Current directory: $(pwd)"
 
-      - name: Debug Directory Contents
-        run: |
-          ls -la /var/www/html
-          ls -la  /var/www/html/laravel9deploycicd
-    
-      
-
       - name: Deploy Laravel Application
         run: |
           
