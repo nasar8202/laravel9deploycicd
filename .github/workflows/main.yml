@@ -78,3 +78,5 @@ jobs:
           sudo chown -R www-data:www-data storage bootstrap/cache
           sudo systemctl restart php8.1-fpm nginx
         shell: /usr/bin/bash -e {0}
+
+      
