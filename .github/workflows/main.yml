@@ -1,0 +1,44 @@
+name: Laravel CI/CD on DigitalOcean
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up SSH keys
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PUBLIC_KEY }}" > ~/.ssh/id_rsa.pub
+          chmod 600 ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa.pub
+          ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+
+      - name: Install PHP and Composer
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y php-cli php-fpm php-json php-common php-mysql php-zip php-gd php-mbstring php-curl php-xml php-pear php-bcmath composer
+          
+      - name: Install Nginx
+        run: |
+          sudo apt-get install -y nginx
+          sudo systemctl start nginx
+          sudo systemctl enable nginx
+
+      - name: Deploy Laravel Application
+        run: |
+          cd /var/www/html
+          git pull origin main
+          composer install
+          php artisan migrate --force
+          php artisan config:cache
+          sudo chown -R www-data:www-data storage bootstrap/cache
+          sudo systemctl restart php8.1-fpm nginx
+
