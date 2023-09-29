@@ -46,7 +46,7 @@ jobs:
 
       - name: Deploy Laravel Application
         run: |
-          cd /var/www/html/laravel9deploycicd
+          cd /var/www/html/laravel9deploycicd/
           git pull origin main
           composer install
           php artisan migrate --force
