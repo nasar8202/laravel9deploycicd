@@ -52,6 +52,11 @@ jobs:
 
       - name: Display Environment Variables
         run: env
+      - name: Debug
+        run: |
+          pwd
+          ls -la /var/www/html/laravel9deploycicd
+        shell: /bin/bash
 
       - name: Deploy Laravel Application
         run: |
