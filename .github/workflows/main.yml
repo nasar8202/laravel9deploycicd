@@ -33,6 +33,18 @@ jobs:
           cat ~/.ssh/id_rsa.pub
           cat ~/.ssh/known_hosts
 
+      - name: Copy .env file
+        run: cp .env.example .env
+
+      - name: Configure database
+        run: |
+          echo "DB_CONNECTION=mysql" >> .env
+          echo "DB_HOST=127.0.0.1" >> .env
+          echo "DB_PORT=3306" >> .env
+          echo "DB_DATABASE=blogs" >> .env
+          echo "DB_USERNAME=root" >> .env
+          echo "DB_PASSWORD=admin" >> .env
+
       - name: Install PHP and Composer
         run: |
           sudo apt-get update
