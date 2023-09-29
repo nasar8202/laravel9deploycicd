@@ -1,35 +1,37 @@
-name: Deploy to EC
+name : laravel ci cd test
 
-on:
-  push:
-    branches:
-      - main
+
+on: 
+   push:
+    branches: main
+  pull_request:
+    branches: main
 
 jobs:
-  deploy:
+  laravel-tests:
+
     runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      steps:
+      - uses: actions/checkout@v2
+-name: Setup PHP
 
-    - name: Configure SSH
-      run: |
-        mkdir -p ~/.ssh/
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H ${{ secrets.EC2_PUBLIC_IP }} >> ~/.ssh/known_hosts
+   uses: shivammathur/setup-php@v2
 
-    - name: Install PHP and dependencies
-      run: sudo apt-get update && sudo apt-get install php php-mbstring php-xml
+ with:
+  php-version: 7.2
+  extensions: mbstring, bcmath  
 
-    - name: Install Composer dependencies
-      run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
-    - name: Deploy to EC2
-      run: |
-        rsync -avz --delete --exclude-from=".rsyncignore" -e "ssh -i ~/.ssh/id_rsa" ./ ubuntu@${{ secrets.EC2_PUBLIC_IP }}:/path/to/your/project
-        ssh -i ~/.ssh/id_rsa ubuntu@${{ secrets.EC2_PUBLIC_IP }} 'cd /path/to/your/project && composer install --no-interaction --prefer-dist --optimize-autoloader && php artisan migrate --force && php artisan config:cache && php artisan route:cache'
+-name: Copy .env.example to .env
 
-    - name: Clear SSH key
-      run: rm ~/.ssh/id_rsa
+  run: php -r "file_exists('.env') || copy('.env.example','.env');"
+
+- name: Install composer dependencies
+  run: composer install
+
+- name: Set required directory permissions
+  run: chmod -R 777 storage bootstrap/cache
+
+- name: Generate encryption key
+  run: php artisan key:generate
