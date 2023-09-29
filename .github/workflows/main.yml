@@ -59,14 +59,13 @@ jobs:
       - name: Debug Directory Contents
         run: |
           ls -la /var/www/html
-          ls -la cd /var/www/html/laravel9deploycicd
+          ls -la  /var/www/html/laravel9deploycicd
     
-      - name: Change directory
-        run:  sudo cd /var/www/html/laravel9deploycicd
+      
 
       - name: Deploy Laravel Application
         run: |
-          cd /var/www/html/laravel9deploycicd
+          
           git pull origin main
           composer install
           php artisan migrate --force
