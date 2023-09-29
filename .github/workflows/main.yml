@@ -43,9 +43,10 @@ jobs:
           sudo apt-get install -y nginx
           sudo systemctl start nginx
           sudo systemctl enable nginx
-      
+      - name: Change directory to Laravel project
+        run: cd /var/www/html/laravel9deploycicd
       - name: List Files in Directory
-        run: ls -la /var/www/html
+        run: ls -la 
 
       - name: Check Current Directory
         run: pwd
