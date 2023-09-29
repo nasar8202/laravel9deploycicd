@@ -45,7 +45,7 @@ jobs:
           sudo systemctl enable nginx
       
       - name: List Files in Directory
-        run: ls -la /var/www/html/laravel9deploycicd
+        run: ls -la /var/www/html/laravel9deploycicd/laravel9deploycicd
 
       - name: Check Current Directory
         run: pwd
