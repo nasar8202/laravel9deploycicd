@@ -41,9 +41,9 @@ jobs:
           echo "DB_CONNECTION=mysql" >> .env
           echo "DB_HOST=127.0.0.1" >> .env
           echo "DB_PORT=3306" >> .env
-          echo "DB_DATABASE=blogs" >> .env
-          echo "DB_USERNAME=root" >> .env
-          echo "DB_PASSWORD=admin" >> .env
+          echo "DB_DATABASE=blogone" >> .env
+          echo "DB_USERNAME=admin" >> .env
+          echo "DB_PASSWORD=password" >> .env
 
       - name: Install PHP and Composer
         run: |
