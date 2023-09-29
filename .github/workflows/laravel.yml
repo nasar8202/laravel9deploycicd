@@ -3,9 +3,8 @@ name : laravel ci cd test
 
 on: 
    push:
-    branches: main
-  pull_request:
-    branches: main
+    branches:
+      - main
 
 jobs:
   laravel-tests:
