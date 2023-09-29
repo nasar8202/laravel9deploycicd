@@ -52,11 +52,9 @@ jobs:
 
       - name: Display Environment Variables
         run: env
-      - name: Debug
+      - name: Print Current Directory
         run: |
-          pwd
-          ls -la /var/www/html/laravel9deploycicd
-        shell: /bin/bash
+          echo "Current directory: $(pwd)"
 
       - name: Deploy Laravel Application
         run: |
