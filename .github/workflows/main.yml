@@ -13,16 +13,68 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up SSH keys
+    - name: Set up SSH keys
         run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          echo "${{ secrets.SSH_PUBLIC_KEY }}" > ~/.ssh/id_rsa.pub
+          echo "-----BEGIN OPENSSH PRIVATE KEY-----" > ~/.ssh/id_rsa
+          echo "-----BEGIN OPENSSH PRIVATE KEY-----
+      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
+      -----END OPENSSH PRIVATE KEY-----" >> ~/.ssh/id_rsa
+          echo "-----END OPENSSH PRIVATE KEY-----" >> ~/.ssh/id_rsa
+          echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCzaP5KKfC7bgF1E0/OKN94dZjbNTs4JF5pUnRyy1HLeQRg3KDRM12G3vLRulZHbIeBL+BkEiSf2/vzyyj/RrJNwrFMYUNrZBtOUgj9J9De5OMfu2Yc8u9OMO5QhY3MDLtRY3jqq3c7bqJm9idl3DD4Cc5TYkIHPCH7HQMwam3/MHa6TkzPPDrMusjNzzMeFqgm0ExVdBemPKvuyCxKOeNGaJyh37Os/2WRfxZZm/SbWRaOau2yysNMo3NDNYi/UQTKyUV41QhDvdAgMFgfUF1hruUAdV3R7HNYxI/Qba6LX5/sl4awwKT9ktDSKVQk9KXbRz4rSW6rBwn0jJECwi2ITc0ZExszU0A/Qn5IqE/y0mHaErw/a3Am9peGc5TjK7gKTXeBaE7wEnKsI7aCrbnCBHWmefN0cKJQwmu2il5hQk0VKbaWo9XQgNpfv4n1l/KZdS6eu6jwiGPU/Y7iJ0bwJPZlem5AuaSDmEaKon4olMEEUmOSUBTJ2c1sJoBOYw6MA0H4AEjBQVdlFA+HacZYgpGBh+SroM+trRxK5uKQQurwWm7/PU1yjPm9BUf7qwo6pSE1OyKu1uPXueXTdo/ZXjHbghW+SX/SF7bC8VKOH2GSDKTfLkBz+N/fw4nTNmxT1aOVXU5sTMwQOmDhrENTsHJgEcR7ljBpX5be8tIfDQ== nasar.ullah@oip.com.pk" > ~/.ssh/id_rsa.pub
           chmod 600 ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa.pub
           ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
           chmod 700 ~/.ssh
           chmod 600 ~/.ssh/id_rsa
           chmod 644 ~/.ssh/id_rsa.pub
+        shell: /usr/bin/bash -e {0}
+
 
       - name: Debug SSH Key Setup
         run: |
