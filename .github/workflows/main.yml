@@ -70,7 +70,7 @@ jobs:
 
       - name: Deploy Laravel Application
         run: |
-          
+          cd /var/www/html/
           git pull origin main
           composer install
           php artisan migrate --force
