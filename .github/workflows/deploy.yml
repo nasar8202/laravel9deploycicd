@@ -27,10 +27,6 @@ jobs:
     - name: Install Composer dependencies
       run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
-    # - name: Deploy to EC2
-    #   run: |
-    #     rsync -avz --delete --exclude-from=".rsyncignore" -e "ssh -i ~/.ssh/id_rsa" ./ ubuntu@${{ secrets.EC2_PUBLIC_IP }}:/var/www/laravel9deploycicd
-    #     ssh -i ~/.ssh/id_rsa ubuntu@${{ secrets.EC2_PUBLIC_IP }} 'cd /var/www/laravel9deploycicd && composer install --no-interaction --prefer-dist --optimize-autoloader && php artisan migrate --force && php artisan config:cache && php artisan route:cache'
+    - name: Deploy to EC2
+      run: composer install --no-interaction --prefer-dist --optimize-autoloader && php artisan migrate --force && php artisan config:cache && php artisan route:cache'
 
-    # - name: Clear SSH key
-    #   run: rm ~/.ssh/id_rsa
